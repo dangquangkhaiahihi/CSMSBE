@@ -12,15 +12,15 @@ namespace CSMS.Data.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private csms_dbContext context;
+        private CsmsDbContext context;
 
         protected DbSet<T> Dbset;
-        protected readonly csms_dbContext _dbContext;
+        protected readonly CsmsDbContext _dbContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public BaseRepository(csms_dbContext context)
+        public BaseRepository(CsmsDbContext context)
         {
             _dbContext = context;
             Dbset = context.Set<T>();

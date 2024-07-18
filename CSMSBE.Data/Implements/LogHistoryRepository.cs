@@ -12,7 +12,7 @@ namespace CSMS.Data.Implements
 {
     public class LogHistoryRepository : BaseRepository<LogHistoryEntity>, ILogHistoryRepository
     {
-        public LogHistoryRepository(csms_dbContext context) : base(context)
+        public LogHistoryRepository(CsmsDbContext context) : base(context)
         {
         }
     }

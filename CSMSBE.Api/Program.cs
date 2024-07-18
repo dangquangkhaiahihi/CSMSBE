@@ -66,7 +66,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddAutoMapper(typeof(MappingProfile));
-        builder.Services.AddDbContext<csms_dbContext>(options =>
+        builder.Services.AddDbContext<CsmsDbContext>(options =>
        options.UseNpgsql(configuration.GetConnectionString("MyWebApiConection"),
            npgsqlOptions => {
                npgsqlOptions.EnableRetryOnFailure(); // Enable retry on failureAddHttpClient
@@ -140,7 +140,7 @@ public class Program
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
         })
-            .AddEntityFrameworkStores<csms_dbContext>()
+            .AddEntityFrameworkStores<CsmsDbContext>()
             .AddDefaultTokenProviders();
 
         builder.Services.AddAuthentication(x =>

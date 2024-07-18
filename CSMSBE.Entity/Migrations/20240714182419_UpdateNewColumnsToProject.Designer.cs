@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CSMS.Entity.Migrations
 {
-    [DbContext(typeof(csms_dbContext))]
+    [DbContext(typeof(CsmsDbContext))]
     [Migration("20240714182419_UpdateNewColumnsToProject")]
     partial class UpdateNewColumnsToProject
     {

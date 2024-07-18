@@ -15,8 +15,8 @@ namespace CSMS.Data.Implements
 {
     public class ScreenRepository : BaseRepository<Screen>, IScreenRepository
     {
-        private readonly csms_dbContext _context;
-        public ScreenRepository(csms_dbContext context) : base(context)
+        private readonly CsmsDbContext _context;
+        public ScreenRepository(CsmsDbContext context) : base(context)
         {
             _context = context;
         }

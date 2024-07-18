@@ -25,10 +25,10 @@ namespace CSMS.Data.Implements
 {
     public class TypeProjectRepository : ITypeProjectRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<TypeProjectRepository> _logger;
         private readonly IMapper _mapper;
-        public TypeProjectRepository(csms_dbContext context, ILogger<TypeProjectRepository> logger, IMapper mapper)
+        public TypeProjectRepository(CsmsDbContext context, ILogger<TypeProjectRepository> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;

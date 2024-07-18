@@ -25,10 +25,10 @@ namespace CSMS.Data.Implements
 {
     public class LocationRepository : ILocationRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<LocationRepository> _logger;
         private readonly IMapper _mapper;
-        public LocationRepository(csms_dbContext context, ILogger<LocationRepository> logger, IMapper mapper)
+        public LocationRepository(CsmsDbContext context, ILogger<LocationRepository> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;

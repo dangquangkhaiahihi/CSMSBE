@@ -20,11 +20,11 @@ namespace CSMS.Data.Implements
 {
     public class IssueRepository :  BaseRepository<Issue>, IIssueRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<IssueRepository> _logger;
         private readonly IMapper _mapper;
 
-        public IssueRepository(csms_dbContext context, ILogger<IssueRepository> logger, IMapper mapper) : base(context)
+        public IssueRepository(CsmsDbContext context, ILogger<IssueRepository> logger, IMapper mapper) : base(context)
         {
             _context = context;
             _logger = logger;

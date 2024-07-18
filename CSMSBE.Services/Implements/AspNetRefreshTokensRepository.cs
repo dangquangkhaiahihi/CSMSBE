@@ -12,7 +12,7 @@ namespace CSMSBE.Services.Implements
 {
     public class AspNetRefreshTokensRepository : BaseRepository<AspNetRefreshTokens>, IAspNetRefreshTokensRepository
     {
-        public AspNetRefreshTokensRepository(csms_dbContext context) : base(context)
+        public AspNetRefreshTokensRepository(CsmsDbContext context) : base(context)
         {
         }
     }

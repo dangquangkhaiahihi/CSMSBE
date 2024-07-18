@@ -20,10 +20,10 @@ namespace CSMS.Data.Implements
 {
     public class ModelRepository : BaseRepository<Entity.CSMS_Entity.Model>, IModelRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<ModelRepository> _logger;
         private readonly IMapper _mapper;
-        public ModelRepository(csms_dbContext context, ILogger<ModelRepository> logger, IMapper mapper) : base(context)
+        public ModelRepository(CsmsDbContext context, ILogger<ModelRepository> logger, IMapper mapper) : base(context)
         {
             _context = context; 
             _logger = logger;
