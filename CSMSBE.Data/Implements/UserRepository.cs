@@ -29,10 +29,10 @@ namespace CSMS.Data.Implements
     {
         private readonly ILogger<UserRepository> _logger;
         private readonly IMapper _mapper;
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        public UserRepository(csms_dbContext context, ILogger<UserRepository> logger, IMapper mapper,
+        public UserRepository(CsmsDbContext context, ILogger<UserRepository> logger, IMapper mapper,
             UserManager<User> userManager,
             RoleManager<Role> roleManager) : base(context)
         {

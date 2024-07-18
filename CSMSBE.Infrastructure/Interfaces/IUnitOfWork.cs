@@ -16,9 +16,9 @@ namespace CSMSBE.Infrastructure.Interfaces
 
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
 
-        public UnitOfWork(csms_dbContext context)
+        public UnitOfWork(CsmsDbContext context)
         {
             _context = context;
         }

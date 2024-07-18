@@ -11,25 +11,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace CSMS.Entity
 {
-    public partial class csms_dbContext : IdentityDbContext<User, Role, string, UserClaim
+    public partial class CsmsDbContext : IdentityDbContext<User, Role, string, UserClaim
         , UserRole, UserLogin, RoleClaim, UserTokens>
     {
-        private readonly IConfiguration _configuration;
-        public csms_dbContext()
+        public CsmsDbContext(DbContextOptions<CsmsDbContext> options) : base(options)
         {
-        }
-        public csms_dbContext(DbContextOptions<csms_dbContext> options, IConfiguration configuration) : base(options)
-        {
-            _configuration = configuration;
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost:5433;Database=csms;Username=speckle;Password=speckle;");
-            }
-
         }
         #region
         public override DbSet<User> Users { get; set; }

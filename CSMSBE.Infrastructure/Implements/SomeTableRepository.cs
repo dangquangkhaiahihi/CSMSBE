@@ -17,9 +17,9 @@ namespace CSMSBE.Infrastructure.Implements
 {
     public class SomeTableRepository : ISomeTableRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<SomeTableRepository> _logger;
-        public SomeTableRepository(csms_dbContext context, ILogger<SomeTableRepository> logger)
+        public SomeTableRepository(CsmsDbContext context, ILogger<SomeTableRepository> logger)
         {
             _context = context;
             _logger = logger;

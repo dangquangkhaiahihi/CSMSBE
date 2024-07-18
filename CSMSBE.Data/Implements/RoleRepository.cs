@@ -18,10 +18,10 @@ namespace CSMS.Data.Implements
 {
     public class RoleRepository : BaseRepository<Role>, IRoleRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<RoleRepository> _logger;
         private readonly IMapper _mapper;
-        public RoleRepository(csms_dbContext context, ILogger<RoleRepository> logger, IMapper mapper) : base(context)
+        public RoleRepository(CsmsDbContext context, ILogger<RoleRepository> logger, IMapper mapper) : base(context)
         {
             _context = context;
             _logger = logger;

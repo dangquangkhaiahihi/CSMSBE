@@ -13,8 +13,8 @@ namespace CSMS.Data.Implements
 {
     public class ActionRepository : BaseRepository<Entity.SecurityMatrix.Action>, IActionRepository
     {
-        private readonly csms_dbContext _context;
-        public ActionRepository(csms_dbContext context) : base(context)
+        private readonly CsmsDbContext _context;
+        public ActionRepository(CsmsDbContext context) : base(context)
         {
             _context = context;
         }

@@ -16,7 +16,7 @@ namespace Data.Implements
     {
         private readonly ILogger<UserTokenRepository> _logger;
 
-        public UserTokenRepository(csms_dbContext context, ILogger<UserTokenRepository> logger) : base(context)
+        public UserTokenRepository(CsmsDbContext context, ILogger<UserTokenRepository> logger) : base(context)
         {
             _logger = logger;
         }

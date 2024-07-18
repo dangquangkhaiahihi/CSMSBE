@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CSMS.Entity.Migrations
 {
-    [DbContext(typeof(csms_dbContext))]
+    [DbContext(typeof(CsmsDbContext))]
     partial class csms_dbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -15,11 +15,11 @@ namespace CSMS.Data.Implements
 {
     public class CommentRepository : BaseRepository<Comment>, ICommentRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<CommentRepository> _logger;
         private readonly IMapper _mapper;
 
-        public CommentRepository(csms_dbContext context, ILogger<CommentRepository> logger, IMapper mapper) : base(context)
+        public CommentRepository(CsmsDbContext context, ILogger<CommentRepository> logger, IMapper mapper) : base(context)
         {
             _context = context;
             _logger = logger;
