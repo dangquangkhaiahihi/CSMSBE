@@ -30,17 +30,15 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
+
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @builder.Configuration["FirebasePrivateKeyPath"]);
 
         builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false)
             .AddJsonFile($"appsettings.{environment}.json", optional: true)
             .AddUserSecrets<Program>()
             .AddEnvironmentVariables();
-        
-        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"<PATH_TO_CREDENTIALS_FILE");
-
 
         builder.Services.AddControllers();
 
@@ -69,7 +67,7 @@ public class Program
                npgsqlOptions.CommandTimeout(30); // Set command timeout (in seconds)
            }));
         builder.Services.AddHttpClient();
-        //Start Add Scoped     
+        //Start Add Scoped
         builder.Services.AddScoped<IWorkerService, WorkerService>();
         builder.Services.AddScoped<IAccountService, AccountService>();
         builder.Services.AddTransient<IAspNetRefreshTokensRepository, AspNetRefreshTokensRepository>();
@@ -90,7 +88,7 @@ public class Program
         builder.Services.AddScoped<ISecurityMatrixRepository, SecurityMatrixRepository>();
         builder.Services.AddScoped<IActionRepository, ActionRepository>();
         builder.Services.AddScoped<IScreenRepository, ScreenRepository>();
-       
+
         //SecurityMatrix
         builder.Services.AddScoped<ISecurityMatrixService, SecurityMatrixService>();
         builder.Services.AddScoped<ISecurityMatrixRepository, SecurityMatrixRepository>();
@@ -202,7 +200,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        
+
 
         app.UseCors("csms");
 
@@ -216,7 +214,7 @@ public class Program
         app.UseMiddleware<PermissionMiddleware>();
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        
+
         app.MapControllers();
 
         app.Run();
