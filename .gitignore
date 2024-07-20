@@ -32,3 +32,5 @@ mono_crash.*
 # Directories for tools
 .nuget/
 packages/
+
+**/appsettings.Development.json
