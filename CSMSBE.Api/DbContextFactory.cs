@@ -8,17 +8,18 @@ namespace CSMSBE.Api
 {
     public class DbContextFactory : IDesignTimeDbContextFactory<CsmsDbContext>
     {
+        private readonly string? _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         public CsmsDbContext CreateDbContext(string[] args)
         {
             var configurations = new ConfigurationBuilder()
                 .AddUserSecrets<Program>()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false)
-                //.AddJsonFile($"appsettings.{_environment}.json", optional: true)
+                .AddJsonFile($"appsettings.{_environment}.json", optional: true)
                 .AddEnvironmentVariables()
                 .Build();
 
-            string connectionString = configurations.GetConnectionString("MyWebApiConection");
+            var connectionString = configurations.GetConnectionString("MyWebApiConection");
 
             var builder = new DbContextOptionsBuilder<CsmsDbContext>()
                 .UseNpgsql(connectionString,
