@@ -1,28 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CSMSBE.Infrastructure;
 using AutoMapper;
 using CSMSBE.Api;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using System.Configuration;
 using Microsoft.OpenApi.Models;
-using Serilog;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System.Text;
-using Microsoft.Extensions.DependencyInjection;
 using CSMSBE.Core.Settings;
 using CSMS.Data.Interfaces;
-using SixLabors.ImageSharp;
-using static QRCoder.PayloadGenerator.WiFi;
-using Microsoft.Extensions.Options;
 using CSMS.Entity;
 using CSMS.Entity.IdentityAccess;
 using CSMSBE.Infrastructure.Interfaces;
-using CSMSBE.Infrastructure.Implements;
 using CSMSBE.Services.Configuration;
 using CSMSBE.Services.Configurations;
 using CSMSBE.Services.Interfaces;
@@ -31,12 +19,10 @@ using CSMSBE.Services.Implements;
 using CSMSBE.Core.Helper;
 using CSMS.Data.Implements;
 using CSMSBE.Services.BaseServices.Interfaces;
-using CSMS.Entity.IdentityExtensions;
 using System.IdentityModel.Tokens.Jwt;
 using Data.Implements;
 using Data.Interfaces;
 using CSMS.Data.Repository;
-using System.Text.Json.Serialization;
 using CSMSBE.Api.PermissionAttribute;
 
 public class Program
@@ -44,7 +30,17 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        // Add builder.builer.Service to the container.
+        
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+        builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false)
+            .AddJsonFile($"appsettings.{environment}.json", optional: true)
+            .AddUserSecrets<Program>()
+            .AddEnvironmentVariables();
+        
+        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"<PATH_TO_CREDENTIALS_FILE");
+
 
         builder.Services.AddControllers();
 
@@ -167,16 +163,6 @@ public class Program
         {
             // Cấu hình các chính sách ủy quyền nếu cần
         });
-
-        /*builder.builer.Service.AddScoped<AccountService>(provider =>
-        {
-            var settings = provider.GetRequiredService<IOptions<AuthenticationSettings>>().Value;
-            var logger = provider.GetRequiredService<ILogger<AccountService>>();
-            return new AccountService(settings, logger);
-        });*/
-        //builder.builer.Service.AddScoped<AccountService>();    
-
-
 
         builder.Services.AddSwaggerGen(opt =>
         {
