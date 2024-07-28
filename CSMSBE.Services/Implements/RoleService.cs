@@ -25,6 +25,7 @@ using CSMSBE.Infrastructure.Implements;
 
 using CSMS.Entity.CSMS_Entity;
 using System.Linq.Expressions;
+using CSMS.Data.UnitOfWork;
 using CSMSBE.Core.Helper;
 
 namespace CSMSBE.Services.Implements

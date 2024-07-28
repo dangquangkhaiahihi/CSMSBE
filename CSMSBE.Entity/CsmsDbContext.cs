@@ -4,6 +4,7 @@ using CSMS.Entity.IdentityExtensions;
 using CSMS.Entity.IdentityExtensions.IdentityMapping;
 using CSMS.Entity.Issues;
 using CSMS.Entity.LogHistory;
+using CSMS.Entity.Notification;
 using CSMS.Entity.SecurityMatrix;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,9 @@ namespace CSMS.Entity
         public CsmsDbContext(DbContextOptions<CsmsDbContext> options) : base(options)
         {
         }
+
         #region
+
         public override DbSet<User> Users { get; set; }
         public DbSet<UserProject> UserProjects { get; set; }
         public DbSet<Role> Role { get; set; }
@@ -37,12 +40,16 @@ namespace CSMS.Entity
         public DbSet<Issue> Issues { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Model> Models { get; set; }
+        public DbSet<PushNotification> PushNotifications { get; set; }
+
         #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AspNetRefreshTokensMap());
 
             base.OnModelCreating(modelBuilder);
+
             #region core model builder
 
             modelBuilder.Entity<Screen>(entity =>
@@ -52,45 +59,52 @@ namespace CSMS.Entity
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                      .HasColumnName("id");
+                    .HasColumnName("id");
 
                 entity.Property(e => e.ParentId)
-                      .HasColumnName("parent_id");
+                    .HasColumnName("parent_id");
 
                 entity.HasOne(e => e.Parent)
-                      .WithMany(p => p.Childrent)
-                      .HasForeignKey(e => e.ParentId);
+                    .WithMany(p => p.Childrent)
+                    .HasForeignKey(e => e.ParentId);
 
                 entity.Property(e => e.Code)
-                      .HasColumnName("code")
-                      .IsRequired();
+                    .HasColumnName("code")
+                    .IsRequired();
 
                 entity.Property(e => e.Name)
-                      .HasColumnName("name")
-                      .IsRequired();
+                    .HasColumnName("name")
+                    .IsRequired();
 
                 entity.Property(e => e.Title)
-                      .HasColumnName("title")
-                      .IsRequired();
+                    .HasColumnName("title")
+                    .IsRequired();
 
                 entity.Property(e => e.Icon)
-                      .HasColumnName("icon");
+                    .HasColumnName("icon");
 
                 entity.Property(e => e.Order)
-                      .HasColumnName("order")
-                      .IsRequired();
+                    .HasColumnName("order")
+                    .IsRequired();
 
                 entity.HasMany(e => e.SecurityMatrices)
-                      .WithOne(sm => sm.Screen)
-                      .HasForeignKey(sm => sm.ScreenId);
+                    .WithOne(sm => sm.Screen)
+                    .HasForeignKey(sm => sm.ScreenId);
             });
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.UserRoles)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasMany(e => e.UserRoles)
+                    .WithOne()
+                    .HasForeignKey(e => e.UserId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(e => e.PushNotifications)
+                    .WithOne(e => e.AppUser)
+                    .HasForeignKey(e => e.AppUserId);
+            });
+
 
             modelBuilder.Entity<UserRole>()
                 .HasOne(e => e.User)
@@ -126,7 +140,7 @@ namespace CSMS.Entity
                 .HasOne(e => e.Role)
                 .WithMany(e => e.SecurityMatrices)
                 .HasForeignKey(e => e.RoleId);
-           
+
             modelBuilder.Entity<UserLogin>()
                 .HasOne(ul => ul.User)
                 .WithMany(u => u.UserLogins)
@@ -140,11 +154,11 @@ namespace CSMS.Entity
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Issue>()
-               .HasOne(i => i.User)
-               .WithMany(u => u.Issues)
-               .HasForeignKey(i => i.UserId)
-               .OnDelete(DeleteBehavior.Restrict)
-               .IsRequired();
+                .HasOne(i => i.User)
+                .WithMany(u => u.Issues)
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
             modelBuilder.Entity<Issue>()
                 .HasOne(i => i.Project)
@@ -160,9 +174,9 @@ namespace CSMS.Entity
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<User>()
-               .HasMany(u => u.Comments)
-               .WithOne(c => c.User)
-               .HasForeignKey(c => c.UserId);
+                .HasMany(u => u.Comments)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId);
 
             modelBuilder.Entity<Issue>()
                 .HasMany(i => i.Comments)
@@ -170,7 +184,7 @@ namespace CSMS.Entity
                 .HasForeignKey(c => c.IssueId);
 
             modelBuilder.Entity<Model>()
-       .HasKey(i => i.Id);
+                .HasKey(i => i.Id);
 
             modelBuilder.Entity<Model>()
                 .Property(m => m.Id)
@@ -187,6 +201,36 @@ namespace CSMS.Entity
                 .HasMany(u => u.Models)
                 .WithOne(c => c.Project)
                 .HasForeignKey(c => c.ProjectID);
+
+            modelBuilder.Entity<PushNotification>(entity =>
+            {
+                {
+                    entity.ToTable(nameof(PushNotifications), schema: "csms");
+
+                    entity.HasKey(e => e.Id);
+
+                    entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd();
+
+                    entity.Property(e => e.Title)
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    entity.Property(e => e.Body)
+                        .IsRequired()
+                        .HasMaxLength(1000);
+
+                    entity.HasOne(e => e.AppUser)
+                        .WithMany(u => u.PushNotifications)
+                        .HasForeignKey(n => n.AppUserId);
+
+                    entity.Property(e => e.SentDate)
+                        .IsRequired();
+
+                    entity.Property(e => e.IsRead)
+                        .IsRequired();
+                }
+            });
 
             #endregion
         }

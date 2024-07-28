@@ -3,6 +3,7 @@ using System;
 using CSMS.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CSMS.Entity.Migrations
 {
     [DbContext(typeof(CsmsDbContext))]
-    partial class csms_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20240728042101_AddPushNotificationTable")]
+    partial class AddPushNotificationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

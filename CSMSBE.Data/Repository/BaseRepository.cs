@@ -1,5 +1,4 @@
 ﻿using CSMS.Entity;
-
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,6 +44,7 @@ namespace CSMS.Data.Repository
         {
             return await Dbset.FindAsync(id);
         }
+
         /// <summary>
         /// Get All list Object
         /// </summary>
@@ -62,7 +62,6 @@ namespace CSMS.Data.Repository
         //{
         //    return Dbset.AsQueryable();
         //}
-
         public IList<T> GetListAllAsync()
         {
             return Dbset
@@ -105,6 +104,7 @@ namespace CSMS.Data.Repository
             {
                 Update(item);
             }
+
             return listItem;
         }
 
@@ -134,6 +134,7 @@ namespace CSMS.Data.Repository
             {
                 Dbset.Add(item);
             }
+
             return entity;
         }
 
@@ -153,6 +154,7 @@ namespace CSMS.Data.Repository
             {
                 return false;
             }
+
             return true;
         }
 
@@ -181,12 +183,13 @@ namespace CSMS.Data.Repository
             {
                 return false;
             }
+
             return true;
         }
 
         public T Find(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
         {
-            var query = Dbset.AsQueryable();
+            var query = Dbset.Where(expression);
 
             if (includes != null)
             {
@@ -195,13 +198,32 @@ namespace CSMS.Data.Repository
                     query = query.Include(include);
                 }
             }
-            query = query.Where(expression);
+
             return query.FirstOrDefault();
         }
 
+        public async Task<T?> FindFirstOrDefaultAsync(
+            Expression<Func<T?, bool>> condition,
+            bool trackChanges)
+        {
+            var query = Dbset.Where(condition);
+
+            if (!trackChanges)
+            {
+                return await query
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(condition);
+            }
+
+            return await query
+                .FirstOrDefaultAsync(condition);
+        }
+
+
         public List<T> FindAll(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
         {
-            var query = Dbset.AsQueryable();
+            var query = Dbset.Where(expression);
+
             if (includes != null)
             {
                 foreach (var include in includes)
@@ -209,10 +231,7 @@ namespace CSMS.Data.Repository
                     query = query.Include(include);
                 }
             }
-            if (expression != null)
-            {
-                query = query.Where(expression);
-            }
+
             return query.ToList();
         }
     }

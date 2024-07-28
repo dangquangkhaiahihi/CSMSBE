@@ -24,7 +24,6 @@
             "https://hstd.cgis.asia"
         ]
     },
-    "FirebasePrivateKeyPath": "{LocalFireBasePrivateKeyPath}",
     "AppSettings": {
         "AccessTokenExpireTimeSpan": 10,
         "TokenExpirationInMinute": 10,

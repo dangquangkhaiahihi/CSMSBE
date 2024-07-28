@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CSMSBE.Core.Helper;
 using CSMS.Entity.Issues;
+using CSMS.Entity.Notification;
 
 namespace CSMS.Entity.IdentityAccess
 {
@@ -33,5 +34,6 @@ namespace CSMS.Entity.IdentityAccess
         public virtual ICollection<UserLogin> UserLogins { get; } = new List<UserLogin>();
         public ICollection<Issue> Issues { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<PushNotification> PushNotifications { get; set; }
     }
 }

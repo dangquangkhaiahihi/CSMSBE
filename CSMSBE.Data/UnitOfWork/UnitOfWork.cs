@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using CSMS.Data.Implements;
+using CSMS.Data.Interfaces;
 using CSMS.Entity;
-
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace CSMSBE.Infrastructure.Interfaces
+namespace CSMS.Data.UnitOfWork
 {
     public interface IUnitOfWork
     {
@@ -17,11 +17,15 @@ namespace CSMSBE.Infrastructure.Interfaces
     public class UnitOfWork : IUnitOfWork
     {
         private readonly CsmsDbContext _context;
+        private readonly Lazy<IPushNotificationRepository> _pushNotificationRepository;
 
         public UnitOfWork(CsmsDbContext context)
         {
             _context = context;
+            _pushNotificationRepository = new Lazy<IPushNotificationRepository>(() => new PushNotificationRepository(context));
         }
+
+        public IPushNotificationRepository PushNotificationRepository => _pushNotificationRepository.Value;
 
         public async Task<bool> CompleteAsync()
         {
