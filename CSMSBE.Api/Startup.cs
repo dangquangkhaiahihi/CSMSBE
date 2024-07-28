@@ -179,7 +179,7 @@ namespace CSMSBE.Api
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "JWT Authoriztion header using the Bearer scheme"
+                    Description = "JWT Authorization header using the Bearer scheme"
                 });
                 opt.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
@@ -192,7 +192,7 @@ namespace CSMSBE.Api
                                 Id = "Bearer"
                             }
                         },
-                        new string[0]
+                        Array.Empty<string>()
                     }
                 });
             });

@@ -33,11 +33,6 @@ public class Program
         app.UseCors("csms");
 
         app.UseHttpsRedirection();
-        
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapHub<NotificationHub>("/notificationHub");
-        });
 
         app.UseRouting();
 
@@ -46,10 +41,14 @@ public class Program
 
         app.UseMiddleware<PermissionMiddleware>();
 
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapHub<NotificationHub>("/notificationHub");
+        });
 
         app.MapControllers();
 
-        app.Run();
+        await app.RunAsync();
     }
 }
