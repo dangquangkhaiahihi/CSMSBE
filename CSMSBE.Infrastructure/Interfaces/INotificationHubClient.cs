@@ -2,5 +2,5 @@
 
 public interface INotificationHubClient
 {
-    Task SendNotification(string message);
+    Task ReceiveMessage(string title, string body);
 }

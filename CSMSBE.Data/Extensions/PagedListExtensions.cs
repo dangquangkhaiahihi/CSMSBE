@@ -1,14 +1,8 @@
 ﻿using CSMSBE.Core.Implements;
 using CSMSBE.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CSMSBE.Infrastructure.Implements
+namespace CSMS.Data.Extensions
 {
     public static class PagedListExtensions
     {

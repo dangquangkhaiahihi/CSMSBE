@@ -24,6 +24,7 @@ using CSMS.Entity.CSMS_Entity;
 using CSMS.Model.DTO.SomeTableDTO;
 using CSMS.Model.DTO.FilterRequest;
 using System.ComponentModel.DataAnnotations.Schema;
+using CSMS.Data.Interfaces;
 
 namespace CSMSBE.Services.Implements
 {

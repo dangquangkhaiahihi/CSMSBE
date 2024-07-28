@@ -18,6 +18,7 @@
 	</ItemGroup>
 	<ItemGroup>
 			<ProjectReference Include="..\CSMSBE.Core\CSMSBE.Core.csproj" />
+			<ProjectReference Include="..\CSMSBE.Data\CSMS.Data.csproj" />
 			<ProjectReference Include="..\CSMSBE.Entity\CSMS.Entity.csproj" />
 			<ProjectReference Include="..\CSMSBE.Model\CSMS.Model.csproj" />
 	</ItemGroup>

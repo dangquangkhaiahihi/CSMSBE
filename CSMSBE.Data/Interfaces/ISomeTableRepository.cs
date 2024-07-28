@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CSMS.Entity.CSMS_Entity;
+﻿using CSMS.Entity.CSMS_Entity;
 using CSMS.Model.DTO.FilterRequest;
 
-namespace CSMSBE.Infrastructure.Interfaces
+namespace CSMS.Data.Interfaces
 {
     public interface ISomeTableRepository /*: IRepository<SomeTable, int>*/
     {

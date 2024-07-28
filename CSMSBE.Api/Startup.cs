@@ -84,6 +84,10 @@ namespace CSMSBE.Api
             // Model
             services.AddScoped<IModelService, ModelService>();
             services.AddScoped<IModelRepository, ModelRepository>();
+            
+            // PushNotification
+            services.AddScoped<IPushNotificationRepository, PushNotificationRepository>();
+            services.AddScoped<IPushNotificationService, PushNotificationService>();
 
             services.AddControllers();
 

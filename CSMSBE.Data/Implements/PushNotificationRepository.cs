@@ -17,7 +17,7 @@ public class PushNotificationRepository : BaseRepository<PushNotification>, IPus
         await InsertAsync(pushNotification);
     }
 
-    public async Task<IEnumerable<PushNotification>> GetNotificationsByUserIdAsync(string appUserId, bool trackChanges)
+    public async Task<IEnumerable<PushNotification>> GetListNotificationsByUserIdAsync(string appUserId, bool trackChanges)
     {
         var query = Query(n => n.AppUserId.Equals(appUserId));
 
@@ -37,8 +37,9 @@ public class PushNotificationRepository : BaseRepository<PushNotification>, IPus
 
     public async Task MarkAsReadAsync(Guid id)
     {
-        var notification = await FindFirstOrDefaultAsync(n => n != null 
-                                                              && n.Id.Equals(id), trackChanges: true);
+        var notification = await FindFirstOrDefaultAsync(n => n != null
+                                                              && n.Id.Equals(id)
+                                                              && n.IsRead.Equals(false), trackChanges: true);
 
         if (notification != null)
         {

@@ -6,6 +6,7 @@ using CSMS.Entity.Issues;
 using CSMS.Entity.LogHistory;
 using CSMS.Entity.Notification;
 using CSMS.Entity.SecurityMatrix;
+using CSMSBE.Core.Helper;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -205,7 +206,7 @@ namespace CSMS.Entity
             modelBuilder.Entity<PushNotification>(entity =>
             {
                 {
-                    entity.ToTable(nameof(PushNotifications), schema: "csms");
+                    entity.ToTable(nameof(PushNotifications), schema: Constant.Schema.CSMS);
 
                     entity.HasKey(e => e.Id);
 

@@ -1,11 +1,12 @@
-﻿using CSMSBE.Services.PushNotification;
+﻿using System.Reactive;
+using CSMS.Data.Extensions;
+using CSMSBE.Services.PushNotification;
 
 namespace CSMSBE.Services.Interfaces;
 
 public interface IPushNotificationService
 {
-    Task AddNotification(PushNotificationCreateDto pushNotificationCreate);
-    Task<IEnumerable<PushNotificationDto>> GetNotificationsByUserId(string userId, bool trackchanges);
-    Task<PushNotificationDto> GetNotificationById(int id, bool trackchanges);
-    Task MarkAsRead(int id);
+    Task<Result<IEnumerable<PushNotificationDto>>> GetListNotificationsByUserId(string userId);
+    Task<Result<PushNotificationDto>> GetNotificationById(Guid id);
+    Task<Result<string>> MarkAsRead(Guid id);
 }
