@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CSMSBE.Entity\CSMS.Entity.csproj" />
-    <ProjectReference Include="..\CSMSBE.Infrastructure\CSMSBE.Infrastructure.csproj" />
+    <ProjectReference Include="..\CSMSBE.Model\CSMS.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -23,6 +23,7 @@ using CSMS.Model.Issue;
 using CSMS.Model;
 using CSMS.Model.DTO.ModelDTO;
 using CSMS.Model.Model;
+using CSMSBE.Services.PushNotification;
 
 namespace CSMSBE.Services.Configurations
 {
@@ -131,6 +132,9 @@ namespace CSMSBE.Services.Configurations
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
             CreateMap<CreateModelDTO, Model>().ReverseMap();
             CreateMap<UpdateModelDTO, Model>().ReverseMap();
+            
+            // PushNotification
+            CreateMap<CSMS.Entity.Notification.PushNotification, PushNotificationDto>();
         }
     }
 }

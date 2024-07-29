@@ -36,13 +36,14 @@ using CSMSBE.Core.Implements;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using CSMS.Data.Repository;
+using CSMS.Data.UnitOfWork;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace CSMSBE.Services.Implements
 {
     public class AccountService : IAccountService
     {
-        private readonly csms_dbContext _csms_DbContext;
+        private readonly CsmsDbContext _csms_DbContext;
         private readonly UserManager<User> _userManager;
         private readonly AuthenticationSettings _authenticationSettings;
         private readonly ILogger<AccountService> _logger;
@@ -63,7 +64,7 @@ namespace CSMSBE.Services.Implements
             IUserTokenRepository userTokenRepository,
             IUserService userService,
             JwtSecurityTokenHandler jwtSecurityTokenHandler,
-            csms_dbContext csms_DbContext,
+            CsmsDbContext csms_DbContext,
             IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;

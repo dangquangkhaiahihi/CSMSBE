@@ -14,7 +14,7 @@ namespace CSMS.Data.Implements
 {
     public class SecurityMatrixRepository : BaseRepository<SecurityMatrices>, ISecurityMatrixRepository
     {
-        public SecurityMatrixRepository(csms_dbContext context) : base(context)
+        public SecurityMatrixRepository(CsmsDbContext context) : base(context)
         {
         }
 

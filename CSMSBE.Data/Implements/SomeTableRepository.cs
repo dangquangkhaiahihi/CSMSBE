@@ -1,25 +1,16 @@
+using CSMS.Data.Interfaces;
 using CSMS.Entity;
 using CSMS.Entity.CSMS_Entity;
-using CSMSBE.Infrastructure.Interfaces;
 using CSMS.Model.DTO.FilterRequest;
-using ImageMagick;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CSMSBE.Infrastructure.Implements
+namespace CSMS.Data.Implements
 {
     public class SomeTableRepository : ISomeTableRepository
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
         private readonly ILogger<SomeTableRepository> _logger;
-        public SomeTableRepository(csms_dbContext context, ILogger<SomeTableRepository> logger)
+        public SomeTableRepository(CsmsDbContext context, ILogger<SomeTableRepository> logger)
         {
             _context = context;
             _logger = logger;

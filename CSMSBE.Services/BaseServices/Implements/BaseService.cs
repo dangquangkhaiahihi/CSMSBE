@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using CSMS.Data.Extensions;
 using CSMSBE.Services.Interfaces;
 using CSMSBE.Services.BaseServices.Interfaces;
 using CSMSBE.Infrastructure.Interfaces;
@@ -17,6 +18,7 @@ using CSMS.Model.DTO.BaseFilterRequest;
 using CSMS.Entity;
 using CSMS.Entity.IdentityAccess;
 using CSMS.Data.Repository;
+using CSMS.Data.UnitOfWork;
 using CSMSBE.Infrastructure.Implements;
 
 namespace CSMSBE.Services.BaseServices.Implements

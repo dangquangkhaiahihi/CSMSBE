@@ -17,13 +17,13 @@ namespace CSMS.Data.Repository
     public class Repository<TEntity, T> : IRepository<TEntity, T> where TEntity : BaseFullAuditedEntity<T>
     {
         protected DbSet<TEntity> Dbset;
-        protected readonly csms_dbContext _dbContext;
+        protected readonly CsmsDbContext _dbContext;
         protected readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public Repository(csms_dbContext context, IHttpContextAccessor httpContextAccessor)
+        public Repository(CsmsDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = context;
             _httpContextAccessor = httpContextAccessor;

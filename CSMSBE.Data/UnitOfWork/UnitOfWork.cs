@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using CSMS.Data.Implements;
+using CSMS.Data.Interfaces;
 using CSMS.Entity;
-
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace CSMSBE.Infrastructure.Interfaces
+namespace CSMS.Data.UnitOfWork
 {
     public interface IUnitOfWork
     {
@@ -16,13 +16,13 @@ namespace CSMSBE.Infrastructure.Interfaces
 
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly csms_dbContext _context;
+        private readonly CsmsDbContext _context;
 
-        public UnitOfWork(csms_dbContext context)
+        public UnitOfWork(CsmsDbContext context)
         {
             _context = context;
         }
-
+        
         public async Task<bool> CompleteAsync()
         {
             return await _context.SaveChangesAsync() > 0;

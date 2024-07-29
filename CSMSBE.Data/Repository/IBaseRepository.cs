@@ -89,5 +89,7 @@ namespace CSMS.Data.Repository
 
         T Find(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
         List<T> FindAll(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
+
+        Task<T?> FindFirstOrDefaultAsync(Expression<Func<T?, bool>> condition, bool trackChanges);
     }
 }

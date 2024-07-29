@@ -17,6 +17,7 @@ using CSMS.Entity.IdentityAccess;
 using CSMS.Entity;
 using CSMS.Model.DTO.BaseFilterRequest.BaseModels;
 using CSMS.Data.Repository;
+using CSMS.Data.UnitOfWork;
 
 namespace CSMSBE.Services.BaseServices.Implements
 {
