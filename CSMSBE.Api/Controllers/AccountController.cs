@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using CSMS.Model.IdentityAccess;
 using CSMSBE.Services.Implements;
 using CSMS.Entity;
-using CSMSBE.Core.SendMailServices;
 using CSMS.Entity.IdentityAccess;
 using Hangfire.Common;
 using Lucene.Net.Support;

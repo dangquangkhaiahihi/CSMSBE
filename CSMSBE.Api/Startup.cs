@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using CSMSBE.Infrastructure.Email;
 
 namespace CSMSBE.Api
 {
@@ -202,6 +203,8 @@ namespace CSMSBE.Api
             });
 
             services.AddSignalR();
+            services.AddScoped<IEmailSenderFactory, EmailSenderFactory>()
+                .Configure<EmailConfiguration>(configuration.GetSection("EmailConfiguration"));
         }
     }
 }

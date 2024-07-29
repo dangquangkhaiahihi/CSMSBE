@@ -8,7 +8,6 @@ using CSMS.Model.User;
 using CSMSBE.Services.Interfaces;
 using CSMS.Entity.IdentityAccess;
 using CSMSBE.Core.Resource;
-using CSMSBE.Core.SendMailServices;
 using CSMSBE.Services.Implements;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
