@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<PackageReference Include="MailKit" Version="4.7.1.1" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+		<PackageReference Include="Postmark" Version="5.1.0" />
 	</ItemGroup>
 	<ItemGroup>
 			<ProjectReference Include="..\CSMSBE.Core\CSMSBE.Core.csproj" />

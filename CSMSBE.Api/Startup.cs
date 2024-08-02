@@ -204,7 +204,8 @@ namespace CSMSBE.Api
 
             services.AddSignalR();
             services.AddScoped<IEmailSenderFactory, EmailSenderFactory>()
-                .Configure<EmailConfiguration>(configuration.GetSection("EmailConfiguration"));
+                .AddScoped<IEmailService, EmailService>()
+                .Configure<SmtpConfiguration>(configuration.GetSection("EmailConfiguration"));
         }
     }
 }

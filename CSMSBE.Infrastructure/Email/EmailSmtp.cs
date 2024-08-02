@@ -8,10 +8,10 @@ namespace CSMSBE.Infrastructure.Email
 {
     public class EmailSmtp : IEmailSenderFactory
     {
-        private readonly EmailConfiguration _smtpConfiguration;
-        private readonly ILogger<EmailConfiguration> _logger;
+        private readonly SmtpConfiguration _smtpConfiguration;
+        private readonly ILogger<SmtpConfiguration> _logger;
 
-        public EmailSmtp(IOptions<EmailConfiguration> smtpConfiguration, ILogger<EmailConfiguration> logger)
+        public EmailSmtp(IOptions<SmtpConfiguration> smtpConfiguration, ILogger<SmtpConfiguration> logger)
         {
             _smtpConfiguration = smtpConfiguration.Value;
             _logger = logger;
@@ -37,7 +37,7 @@ namespace CSMSBE.Infrastructure.Email
         {
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(_smtpConfiguration.SenderName, _smtpConfiguration.Sender));
-            emailMessage.To.AddRange(message.Tos);
+            emailMessage.To.AddRange(message.DisplaynameAddressTos);
             emailMessage.Subject = message.Subject;
 
             var bodyBuilder = new BodyBuilder

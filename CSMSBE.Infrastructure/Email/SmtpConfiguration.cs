@@ -1,6 +1,6 @@
 ﻿namespace CSMSBE.Infrastructure.Email
 {
-    public class EmailConfiguration
+    public class SmtpConfiguration
     {
         public string? MailServer { get; set; }
 

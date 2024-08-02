@@ -42,6 +42,7 @@
     "SizeLimit": 1024,
     "TimeExpiration": 300
   },
+  "UseSmtp": true,
   "EmailConfiguration": {
     "MailServer": "localhost",
     "MailPort": 1025,
@@ -49,6 +50,11 @@
     "Sender": "your-email@example.com",
     "Username": "your-email@example.com",
     "Password": ""
+  },
+  "PostmarkConfiguration": {
+    "ServerToken": "{ServerToken}",
+    "SenderSignature": 1025,
+    "SenderEmail": "{SenderName}"
   },
   "ClientSettings": {
     "MapDefault": {

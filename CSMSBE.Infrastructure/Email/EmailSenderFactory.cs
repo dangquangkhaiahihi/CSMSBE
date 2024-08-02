@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace CSMSBE.Infrastructure.Email
@@ -13,23 +14,46 @@ namespace CSMSBE.Infrastructure.Email
     public class EmailSenderFactory : IEmailSenderFactory
     {
         private readonly IEmailSenderFactory _senderInstance;
-        private readonly ILogger<EmailConfiguration> _logger;
-
-        public EmailSenderFactory(IOptions<EmailConfiguration> smtpConfiguration, ILogger<EmailConfiguration> logger)
+        private readonly ILogger<SmtpConfiguration> _smtpLogger;
+        private readonly ILogger<PostmarkConfiguration> _postmarkLogger;
+        public EmailSenderFactory(
+            IConfiguration configuration,
+            IOptions<SmtpConfiguration> smtpConfiguration,
+            IOptions<PostmarkConfiguration> postmarkConfiguration,
+            ILogger<SmtpConfiguration> smtpLogger,
+            ILogger<PostmarkConfiguration> postmarkLogger)
         {
             _senderInstance = null;
-            _logger = logger;
+            _smtpLogger = smtpLogger;
+            _postmarkLogger = postmarkLogger;
 
-            var smtp = new EmailSmtp(smtpConfiguration, logger);
+            var doUseSmtp = bool.Parse(configuration["UseSmtp"]);
 
-            if (smtp.IsValid)
+            if (doUseSmtp)
             {
-                _senderInstance = smtp;
+                var smtp = new EmailSmtp(smtpConfiguration, _smtpLogger);
+
+                if (smtp.IsValid)
+                {
+                    _senderInstance = smtp;
+                }
+                else
+                {
+                    _smtpLogger.LogError("SMTP email provider selected but no valid SMTP settings configured.");
+                }
             }
-            // TODO: Add flag to switch to 3rd-party email service provider e.g., SendGrid, Postmark, etc. here
             else
             {
-                _logger.LogError("SMTP email provider selected but no valid SMTP settings configured.");
+                var postmark = new EmailPostmark(postmarkConfiguration, _postmarkLogger);
+
+                if (postmark.IsValid)
+                {
+                    _senderInstance = postmark;
+                }
+                else
+                {
+                    _postmarkLogger.LogError("Postmark email provider selected but no valid server token settings configured.");
+                }
             }
         }
 

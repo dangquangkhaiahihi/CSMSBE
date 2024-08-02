@@ -13,7 +13,8 @@ namespace CSMSBE.Infrastructure.Email
 
     public class Message
     {
-        public List<MailboxAddress> Tos { get; set; }
+        public List<MailboxAddress> DisplaynameAddressTos { get; set; }
+        public List<string> AddressTos { get; set; }
 
         public string Subject { get; set; }
 
@@ -21,11 +22,21 @@ namespace CSMSBE.Infrastructure.Email
 
         public IFormFileCollection Attachments { get; set; }
 
-        public Message(IEnumerable<EmailAddress> tos, string subject, string content, IFormFileCollection attachments)
+        public Message(IEnumerable<EmailAddress> displayNameAddressTos, string subject, string content, IFormFileCollection attachments)
         {
-            Tos = new List<MailboxAddress>();
+            DisplaynameAddressTos = new List<MailboxAddress>();
 
-            Tos.AddRange(tos.Select(x => new MailboxAddress(x.DisplayName, x.Address)));
+            DisplaynameAddressTos.AddRange(displayNameAddressTos.Select(x => new MailboxAddress(x.DisplayName, x.Address)));
+            Subject = subject;
+            Content = content;
+            Attachments = attachments;
+        }
+
+        public Message(List<EmailAddress> addressTos, string subject, string content, IFormFileCollection attachments)
+        {
+            AddressTos = new List<string>();
+
+            AddressTos.AddRange(addressTos.Select(x => x.Address));
             Subject = subject;
             Content = content;
             Attachments = attachments;
