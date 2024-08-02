@@ -205,7 +205,8 @@ namespace CSMSBE.Api
             services.AddSignalR();
             services.AddScoped<IEmailSenderFactory, EmailSenderFactory>()
                 .AddScoped<IEmailService, EmailService>()
-                .Configure<SmtpConfiguration>(configuration.GetSection("EmailConfiguration"));
+                .Configure<SmtpConfiguration>(configuration.GetSection("SmtpConfiguration"))
+                .Configure<PostmarkConfiguration>(configuration.GetSection("PostmarkConfiguration"));
         }
     }
 }
