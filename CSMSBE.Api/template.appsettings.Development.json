@@ -1,65 +1,71 @@
 {
-    "Logging": {
-        "LogLevel": {
-            "Default": "Information",
-            "Microsoft.AspNetCore": "Warning"
-        }
-    },
-    "ConnectionStrings": {
-        "MyWebApiConection": "{LocalConnectionString}"
-    },
-    "SpeckleInfo": {
-        "AuthToken": "{LocalAuthToken}",
-        "ServerUrl": "https://app.speckle.systems/"
-    },
-    "AllowedHosts": "*",
-    "JWT": {
-        "SecretKey": "{LocalJWTSecretKey}",
-        "RefreshExpireDay": 10,
-        "AllowedAuthOrigins": [
-            "*",
-            "http://localhost:3000",
-            "http://localhost:3001",
-            "https://hstd.cgis.asia",
-            "https://hstd.cgis.asia"
-        ]
-    },
-    "AppSettings": {
-        "AccessTokenExpireTimeSpan": 10,
-        "TokenExpirationInMinute": 10,
-        "MinimumRequiredLength": 8,
-        "BaseUrl": "http://localhost/",
-        "DefaultPageSize": 10,
-        "UserLogin": "https://hstd.cgis.asia/",
-        "AdminUrlLogin": "https://hstd.cgis.asia/",
-        "UserDetailRecords": "https://hstd.cgis.asia/file-detail/{0}",
-        "AdminDetailRecords": "https://hstd.cgis.asia/doc-wait-detail/{0}",
-        "ResetPasswordUrl": "http://hstd.cgis.asia/reset-password?token=",
-        "PgVersion": "9.6"
-    },
-    "CacheSettings": {
-        "UseCache": true,
-        "SizeLimit": 1024,
-        "TimeExpiration": 300
-    },
-    "EmailConfiguration": {
-        "EmailHost": "smtp.gmail.com",
-        "EmailPost": 587,
-        "EmailUser": "{LocalEmail}",
-        "EmailPass": "{LocalEmailPass}",
-        "EmailFrom": "{LocalEmail}",
-        "EmailAdmin": "{LocalEmail}"
-    },
-    "ClientSettings": {
-        "MapDefault": {
-            "Id": "1"
-        }
-    },
-    "Swagger": {
-        "Enabled": true
-    },
-    "ApiVersion": "v1",
-    "TimeToReloadCache": {
-        "ReloadTime": 300
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
     }
+  },
+  "ConnectionStrings": {
+    "MyWebApiConection": "{LocalConnectionString}"
+  },
+  "SpeckleInfo": {
+    "AuthToken": "{LocalAuthToken}",
+    "ServerUrl": "https://app.speckle.systems/"
+  },
+  "AllowedHosts": "*",
+  "JWT": {
+    "SecretKey": "{LocalJWTSecretKey}",
+    "RefreshExpireDay": 10,
+    "AllowedAuthOrigins": [
+      "*",
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://hstd.cgis.asia",
+      "https://hstd.cgis.asia"
+    ]
+  },
+  "AppSettings": {
+    "AccessTokenExpireTimeSpan": 10,
+    "TokenExpirationInMinute": 10,
+    "MinimumRequiredLength": 8,
+    "BaseUrl": "http://localhost/",
+    "DefaultPageSize": 10,
+    "UserLogin": "https://hstd.cgis.asia/",
+    "AdminUrlLogin": "https://hstd.cgis.asia/",
+    "UserDetailRecords": "https://hstd.cgis.asia/file-detail/{0}",
+    "AdminDetailRecords": "https://hstd.cgis.asia/doc-wait-detail/{0}",
+    "ResetPasswordUrl": "http://hstd.cgis.asia/reset-password?token=",
+    "PgVersion": "9.6"
+  },
+  "CacheSettings": {
+    "UseCache": true,
+    "SizeLimit": 1024,
+    "TimeExpiration": 300
+  },
+  "UseSmtp": true,
+  "EmailConfiguration": {
+    "MailServer": "localhost",
+    "MailPort": 1025,
+    "SenderName": "Your Sender Name",
+    "Sender": "your-email@example.com",
+    "Username": "your-email@example.com",
+    "Password": ""
+  },
+  "PostmarkConfiguration": {
+    "ServerToken": "{ServerToken}",
+    "SenderSignature": 1025,
+    "SenderEmail": "{SenderName}"
+  },
+  "ClientSettings": {
+    "MapDefault": {
+      "Id": "1"
+    }
+  },
+  "Swagger": {
+    "Enabled": true
+  },
+  "ApiVersion": "v1",
+  "TimeToReloadCache": {
+    "ReloadTime": 300
+  }
 }

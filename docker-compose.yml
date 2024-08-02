@@ -1,0 +1,37 @@
+name: "csms-deps"
+
+services:
+    postgres:
+        image: "postgres:14.5-alpine"
+        restart: always
+        environment:
+            POSTGRES_DB: csms
+            POSTGRES_USER: speckle
+            POSTGRES_PASSWORD: speckle
+        volumes:
+            - postgres-data:/var/lib/postgresql/data/
+        ports:
+            - "5432:5432"
+        healthcheck:
+            # the -U user has to match the POSTGRES_USER value
+            test: ["CMD-SHELL", "pg_isready -U speckle"]
+            interval: 5s
+            timeout: 5s
+            retries: 30
+    maildev:
+        image: maildev/maildev
+        restart: always
+        environment:
+            - TZ=Asia/Shanghai
+            - MAILDEV_WEB_PORT=1080
+            - MAILDEV_SMTP_PORT=1025
+        ports:
+            - "1080:1080"
+            - "1025:1025"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "1m"
+
+volumes:
+    postgres-data:
